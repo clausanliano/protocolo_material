@@ -3,8 +3,12 @@
 @section('title', 'Fabricantes')
 
 @section('content')
-    <div class="card my-3">
-        <div class="card-header bg-secondary">
+<div class="py-2">
+    @if (session('mensagem'))
+        <div class="alert alert-success">{{ session('mensagem') }}</div>
+    @endif
+    <div class="card card-dark">
+        <div class="card-header"></div>
             Fabricantes
         </div>
         <div class="card-body">
@@ -19,7 +23,17 @@
                     @forelse ($lista as $item)
                         <tr>
                             <td>{{ $item->nome }}</td>
-                            <td>-</td>
+                            <td width='30%'>
+                                <div class="form-inline">
+                                    <a href="{{ route('fabricante.show', $item->id) }}" class="btn btn-info mx-1" >Mostrar</a>
+                                    <a href="{{ route('fabricante.edit', $item->id) }}" class="btn btn-warning mx-1" >Editar</a>
+                                    <form action="{{ route('fabricante.destroy', $item->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger mx-1" type="submit">Apagar</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -30,9 +44,10 @@
             </table>
         </div>
         <div class="card-footer">
-            Inserir
+            <a href="{{ route('fabricante.create') }}" class="btn btn-success">Inserir</a>
         </div>
     </div>
+</div>
 @stop
 
 @section('plugins.Datatables', true)
@@ -40,7 +55,11 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            $('#example').DataTable();
+            $('#example').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json',
+                },
+            });
         });
     </script>
 @stop

@@ -15,69 +15,39 @@ class FabricanteController extends Controller
         return view('fabricante.index')->with(compact('lista'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $objeto = new Fabricante();
+        return view('fabricante.edit')->with(compact('objeto'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreFabricanteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreFabricanteRequest $request)
     {
-        //
+        Fabricante::create($request->validated());
+        return redirect(route('fabricante.index'))->with(  'mensagem', 'Registro CADASTRADO com sucesso!!!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Fabricante  $fabricante
-     * @return \Illuminate\Http\Response
-     */
     public function show(Fabricante $fabricante)
     {
-        //
+        $objeto = $fabricante;
+        return view('fabricante.show')->with(compact('objeto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Fabricante  $fabricante
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Fabricante $fabricante)
     {
-        //
+        $objeto = $fabricante;
+        return view('fabricante.edit')->with(compact('objeto'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateFabricanteRequest  $request
-     * @param  \App\Models\Fabricante  $fabricante
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateFabricanteRequest $request, Fabricante $fabricante)
     {
-        //
+        $objeto = $fabricante->update($request->validated());
+        return redirect(route('fabricante.index'))->with(  'mensagem', 'Registro ALTERADO com sucesso!!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Fabricante  $fabricante
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Fabricante $fabricante)
     {
-        //
+        $fabricante->delete();
+        return redirect(route('fabricante.index'))->with(  'mensagem', 'Registro EXCLUÍDO com sucesso!!!');
     }
 }
