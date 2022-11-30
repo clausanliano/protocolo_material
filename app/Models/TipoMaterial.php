@@ -10,4 +10,6 @@ class TipoMaterial extends Model
     use HasFactory;
 
     protected $table = 'tipos_material';
+
+    protected $fillable = ['nome', 'observacao'];
 }

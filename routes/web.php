@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FabricanteController;
+use App\Http\Controllers\TipoMaterialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('fabricante', FabricanteController::class);
+Route::resource('tipo_material', TipoMaterialController::class);

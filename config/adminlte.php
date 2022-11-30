@@ -311,6 +311,10 @@ return [
             'url'  => 'fabricante',
         ],
         [
+            'text' => 'Tipos de Material',
+            'url'  => 'tipo_material',
+        ],
+        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',

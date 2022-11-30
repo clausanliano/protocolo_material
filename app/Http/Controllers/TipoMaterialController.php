@@ -8,79 +8,46 @@ use App\Http\Requests\UpdateTipoMaterialRequest;
 
 class TipoMaterialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $lista = TipoMaterial::all();
+        return view('tipo_material.index')->with(compact('lista'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $objeto = new TipoMaterial();
+        return view('tipo_material.edit')->with(compact('objeto'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTipoMaterialRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreTipoMaterialRequest $request)
     {
-        //
+        TipoMaterial::create($request->validated());
+        return redirect(route('tipo_material.index'))->with(  'mensagem', 'Registro CADASTRADO com sucesso!!!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TipoMaterial  $tipoMaterial
-     * @return \Illuminate\Http\Response
-     */
     public function show(TipoMaterial $tipoMaterial)
     {
-        //
+        $objeto = $tipoMaterial;
+        return view('tipo_material.show')->with(compact('objeto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TipoMaterial  $tipoMaterial
-     * @return \Illuminate\Http\Response
-     */
     public function edit(TipoMaterial $tipoMaterial)
     {
-        //
+        $objeto = $tipoMaterial;
+        return view('tipo_material.edit')->with(compact('objeto'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTipoMaterialRequest  $request
-     * @param  \App\Models\TipoMaterial  $tipoMaterial
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateTipoMaterialRequest $request, TipoMaterial $tipoMaterial)
     {
-        //
+        $objeto = $tipoMaterial->update($request->validated());
+        return redirect(route('tipo_material.index'))->with(  'mensagem', 'Registro ALTERADO com sucesso!!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TipoMaterial  $tipoMaterial
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(TipoMaterial $tipoMaterial)
     {
-        //
+        $tipoMaterial->delete();
+        return redirect(route('tipo_material.index'))->with(  'mensagem', 'Registro EXCLUÍDO com sucesso!!!');
     }
 }

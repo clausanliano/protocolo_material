@@ -7,13 +7,8 @@ use Illuminate\Database\Seeder;
 
 class TipoMaterialSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        //
+        \App\Models\TipoMaterial::factory(10)->create();
     }
 }

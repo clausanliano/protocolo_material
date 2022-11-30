@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Fabricantes')
+@section('title', 'Tipos de Material')
 
 @section('content')
 <div class="py-2">
@@ -9,7 +9,7 @@
     @endif
     <div class="card card-dark">
         <div class="card-header">
-            Fabricantes
+            Tipos de Material
         </div>
         <div class="card-body">
             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -25,9 +25,9 @@
                             <td>{{ $item->nome }}</td>
                             <td width='30%'>
                                 <div class="form-inline">
-                                    <a href="{{ route('fabricante.show', $item->id) }}" class="btn btn-info mx-1" >Mostrar</a>
-                                    <a href="{{ route('fabricante.edit', $item->id) }}" class="btn btn-warning mx-1" >Editar</a>
-                                    <form action="{{ route('fabricante.destroy', $item->id)}}" method="post">
+                                    <a href="{{ route('tipo_material.show', $item->id) }}" class="btn btn-info mx-1" >Mostrar</a>
+                                    <a href="{{ route('tipo_material.edit', $item->id) }}" class="btn btn-warning mx-1" >Editar</a>
+                                    <form action="{{ route('tipo_material.destroy', $item->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger mx-1" type="submit">Apagar</button>
@@ -44,7 +44,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="{{ route('fabricante.create') }}" class="btn btn-success">Inserir</a>
+            <a href="{{ route('tipo_material.create') }}" class="btn btn-success">Inserir</a>
         </div>
     </div>
 </div>
