@@ -315,6 +315,10 @@ return [
             'url'  => 'tipo_material',
         ],
         [
+            'text' => 'Modelos de Material',
+            'url'  => 'modelo',
+        ],
+        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',

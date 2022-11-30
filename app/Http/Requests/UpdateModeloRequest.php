@@ -6,25 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateModeloRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'nome' => 'required|min:2',
+            'observacao' => 'string|nullable',
+            'tipo_material_id' => 'numeric|required',
+            'fabricante_id' => 'numeric|required',
         ];
     }
 }
