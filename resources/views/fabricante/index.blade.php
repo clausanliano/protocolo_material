@@ -8,7 +8,7 @@
         <div class="alert alert-success">{{ session('mensagem') }}</div>
     @endif
     <div class="card card-dark">
-        <div class="card-header">
+        <div class="card-header"></div>
             Fabricantes
         </div>
         <div class="card-body">
