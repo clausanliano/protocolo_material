@@ -17,11 +17,19 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome', $objeto->nome)}}">
+                    <input type="text" class="form-control @error('nome') is-invalid @enderror"
+                        name="nome" id="nome" value="{{ old('nome', $objeto->nome)}}">
+                    @error('nome')
+                        <div class="badge badge-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="observacao">Observação</label>
-                    <textarea class="form-control" name="observacao" id="observacao" cols="30" rows="5">{{ old('observacao', $objeto->observacao)}}</textarea>
+                    <textarea class="form-control @error('observacao') is-invalid @enderror"
+                        name="observacao" id="observacao" cols="30" rows="5">{{ old('observacao', $objeto->observacao)}}</textarea>
+                    @error('observacao')
+                        <div class="badge badge-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
