@@ -5,82 +5,58 @@ namespace App\Http\Controllers;
 use App\Models\Recibo;
 use App\Http\Requests\StoreReciboRequest;
 use App\Http\Requests\UpdateReciboRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ReciboController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $lista = Recibo::where('entregador_id', Auth()->user()->id)->orWhere('recebedor_id', Auth()->user()->id)->get();
+        return view('recibo.index')->with(compact('lista'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $objeto = new Recibo();
+        $recebedores = User::where('id', '<>', Auth()->user()->id)->get();
+        return view('recibo.edit')->with(compact('objeto', 'recebedores'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreReciboRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreReciboRequest $request)
     {
-        //
+        $dados = $request->validated();
+        $dados['entregador_id'] = Auth()->user()->id;
+        Recibo::create($dados);
+        return redirect(route('recibo.index'))->with(  'mensagem', 'Registro CADASTRADO com sucesso!!!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Recibo  $recibo
-     * @return \Illuminate\Http\Response
-     */
     public function show(Recibo $recibo)
     {
-        //
+        $objeto = $recibo;
+        return view('recibo.show')->with(compact('objeto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Recibo  $recibo
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Recibo $recibo)
     {
-        //
+        $objeto = $recibo;
+        $recebedores = User::where('id', '<>', Auth()->user()->id)->get();
+        return view('recibo.edit')->with(compact('objeto', 'recebedores'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateReciboRequest  $request
-     * @param  \App\Models\Recibo  $recibo
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateReciboRequest $request, Recibo $recibo)
     {
-        //
+        $dados = $request->validated();
+        $dados['entregador_id'] = Auth()->user()->id;
+        $recibo->update($dados);
+        return redirect(route('recibo.index'))->with(  'mensagem', 'Registro CADASTRADO com sucesso!!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Recibo  $recibo
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Recibo $recibo)
     {
-        //
+        $recibo->delete();
+        return redirect(route('recibo.index'))->with(  'mensagem', 'Registro EXCLUÍDO com sucesso!!!');
     }
 }

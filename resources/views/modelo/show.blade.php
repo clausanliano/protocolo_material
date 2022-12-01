@@ -3,7 +3,8 @@
 @section('title', 'Formulário: Modelo de Material')
 
 @section('content')
-    <div class="card my-3">
+<div class="py-2">
+    <div class="card">
         <div class="card-header bg-secondary">
             Formulário: Modelo de Material
         </div>
@@ -34,6 +35,8 @@
             <a href="{{ route('modelo.index') }}" class="btn btn-primary">Voltar a Lista</a>
         </div>
     </div>
+</div>
+
 @stop
 
 

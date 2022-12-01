@@ -3,7 +3,8 @@
 @section('title', 'Formulário: Tipos de Material')
 
 @section('content')
-    <div class="card my-3">
+<div class="py-2">
+    <div class="card">
         <div class="card-header bg-secondary">
             Formulário: Tipos de Material
         </div>
@@ -21,6 +22,7 @@
             <a href="{{ route('tipo_material.index') }}" class="btn btn-primary">Voltar a Lista</a>
         </div>
     </div>
+</div>
 @stop
 
 @section('plugins.Datatables', true)

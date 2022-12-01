@@ -322,8 +322,10 @@ return [
             'text' => 'Materiais',
             'url'  => 'material',
         ],
-
-
+       [
+            'text' => 'Recibos',
+            'url'  => 'recibo',
+        ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',

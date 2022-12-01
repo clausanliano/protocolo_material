@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\FabricanteController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\ReciboController;
 use App\Http\Controllers\TipoMaterialController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +20,5 @@ Route::resource('fabricante', FabricanteController::class);
 Route::resource('tipo_material', TipoMaterialController::class);
 Route::resource('modelo', ModeloController::class);
 Route::resource('material', MaterialController::class);
+Route::resource('recibo', ReciboController::class);
+Route::resource('item', ItemController::class);
