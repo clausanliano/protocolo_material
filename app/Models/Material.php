@@ -10,4 +10,13 @@ class Material extends Model
     use HasFactory;
 
     protected $table = 'materiais';
+
+    protected $fillable = ['serial', 'tombo', 'observacao', 'modelo_id'];
+
+    public function modelo()
+    {
+        return $this->belongsTo(Modelo::class, 'modelo_id', 'id');
+    }
+
+
 }

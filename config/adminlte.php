@@ -319,6 +319,12 @@ return [
             'url'  => 'modelo',
         ],
         [
+            'text' => 'Materiais',
+            'url'  => 'material',
+        ],
+
+
+        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',

@@ -5,82 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
+use App\Models\Modelo;
 
 class MaterialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $lista = Material::all();
+        return view('material.index')->with(compact('lista'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $objeto = new Material();
+        $modelos = Modelo::all();
+        return view('material.edit')->with(compact('objeto', 'modelos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMaterialRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreMaterialRequest $request)
     {
-        //
+        Material::create($request->validated());
+        return redirect(route('material.index'))->with(  'mensagem', 'Registro CADASTRADO com sucesso!!!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
     public function show(Material $material)
     {
-        //
+        $objeto = $material;
+        return view('material.show')->with(compact('objeto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Material $material)
     {
-        //
+        $objeto = $material;
+        $modelos = Modelo::all();
+        return view('material.edit')->with(compact('objeto', 'modelos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMaterialRequest  $request
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateMaterialRequest $request, Material $material)
     {
-        //
+        $objeto = $material->update($request->validated());
+        return redirect(route('material.index'))->with(  'mensagem', 'Registro ALTERADO com sucesso!!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Material  $material
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Material $material)
     {
-        //
+        $material->delete();
+        return redirect(route('material.index'))->with(  'mensagem', 'Registro EXCLUÍDO com sucesso!!!');
     }
 }
