@@ -40,13 +40,61 @@
         </div>
 
         <div class="card-body">
-            Lista de itens
+
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Serial</th>
+                        <th>Tombo</th>
+                        <th>Tipo de Material</th>
+                        <th>Modelo</th>
+                        <th>Fabricante</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($objeto->itens as $item)
+                        <tr>
+                            <td>{{ $item->material->serial }}</td>
+                            <td>{{ $item->material->tombo }}</td>
+                            <td>{{ $item->material->modelo->tipo_material->nome }}</td>
+                            <td>{{ $item->material->modelo->nome }}</td>
+                            <td>{{ $item->material->modelo->fabricante->nome }}</td>
+                            <td width='30%'>
+                                <div class="form-inline">
+                                    <a href="{{ route('recibo.show', $item->id) }}" class="btn btn-info mx-1" >Mostrar</a>
+                                    <a href="{{ route('item.edit', $item->id) }}" class="btn btn-warning mx-1" >Editar</a>
+                                    <form action="{{ route('item.destroy', $item->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger mx-1" type="submit">Apagar</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5">Não há registros cadastrados</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
         </div>
 
 
         <div class="card-footer">
             <a href="{{ route('recibo.index') }}" class="btn btn-primary">Voltar a Lista</a>
-            <a href="{{ route('item.create') }}" class="btn btn-success">Inserir Item</a>
+            <a href="{{ route('item.create', $objeto) }}" class="btn btn-success">Inserir Item</a>
         </div>
     </div>
 </div>

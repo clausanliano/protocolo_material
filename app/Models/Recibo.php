@@ -23,4 +23,9 @@ class Recibo extends Model
         return $this->belongsTo(User::class, 'recebedor_id', 'id');
     }
 
+    public function itens()
+    {
+        return $this->hasMany(Item::class, 'recibo_id', 'id');
+    }
+
 }
